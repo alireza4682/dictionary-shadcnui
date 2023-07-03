@@ -59,7 +59,9 @@ const wordSlice = createSlice({
           headWord: state.currentWord,
           rel: action.payload,
           mode: state.mode
-        })
+        }
+
+        )
       }
     },
     setMode: (state, action) => {
