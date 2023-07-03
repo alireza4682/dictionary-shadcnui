@@ -13,11 +13,12 @@ export const OneWord = () =>
     const dispatch = useAppDispatch();
     const { status, data } = useQueryWord("ml", "hit");
 
-    const onClickArrow = ()=>{
-    dispatch(setHeadWord(data?.word))
-    if(status==='success'){
-    dispatch(makeNewCard(data))}
-  }
+    const onClickArrow = () => {
+      dispatch(setHeadWord("hit"));
+      if (status === "success") {
+        dispatch(makeNewCard(data));
+      }
+    };
 
     return (
       <div className="flex flex-row justify-between text-black">
