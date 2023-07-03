@@ -6,24 +6,24 @@ export type TData = {
   defs: string[];
   tags: string[];
   score: number;
-}
+};
 
 const fetchWord = async (endpoint: TendPoint, newWord: string) => {
   const res = await fetch(
-    `https://api.datamuse.com/words?${endpoint}=${newWord}&max=5md=d`
-  )
-  return await res.json()
-}
+    `https://api.datamuse.com/words?${endpoint}=${newWord}&max=5&md=d`
+  );
+  return await res.json();
+};
 
 const useQueryWord = (endpoint: TendPoint, headWord: string) => {
   const { status, data } = useQuery({
     queryKey: ["headWord", headWord, endpoint],
     queryFn: async () => {
-      const response = await fetchWord(endpoint, headWord)
-      return response as TData
-    }
-  })
-  return { status, data }
-}
+      const response = await fetchWord(endpoint, headWord);
+      return response as TData;
+    },
+  });
+  return { status, data };
+};
 
-export default useQueryWord
+export default useQueryWord;
