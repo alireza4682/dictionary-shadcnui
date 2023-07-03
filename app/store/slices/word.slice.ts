@@ -40,6 +40,7 @@ const wordSlice = createSlice({
   initialState: { currentWord: "", cards: [], mode: "ml" } as MainStateType,
   reducers: {
     setHeadWord: (state, action) => {
+      state.currentWord=""
       state.currentWord = action.payload;
     },
     removeCard: (state, action) => {
@@ -58,8 +59,8 @@ const wordSlice = createSlice({
       );
       if (!exist && state.currentWord) {
         state.cards.push({
-          headWord: state.currentWord,
-          rel: action.payload.defs,
+          headWord: action.payload.word,
+          rel: action.payload,
           mode: state.mode,
         });
       }

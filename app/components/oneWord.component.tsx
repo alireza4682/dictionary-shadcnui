@@ -1,6 +1,6 @@
 "use client";
 import useQueryWord, { TData } from "../hooks/queryWord";
-import { makeNewCard } from "../store/slices/word.slice";
+import { makeNewCard, setHeadWord } from "../store/slices/word.slice";
 import { useAppDispatch } from "../store/store";
 import { Button } from "./ui/button.ui";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
@@ -13,9 +13,15 @@ export const OneWord = () =>
     const dispatch = useAppDispatch();
     const { status, data } = useQueryWord("ml", "hit");
 
+    const onClickArrow = ()=>{
+    dispatch(setHeadWord(data?.word))
+    if(status==='success'){
+    dispatch(makeNewCard(data))}
+  }
+
     return (
       <div className="flex flex-row justify-between text-black">
-        <Button variant={"ghost"} onClick={() => dispatch(makeNewCard(data))}>
+        <Button variant={"ghost"} onClick={() => onClickArrow()}>
           {data?.word}
         </Button>
         <Button variant={"outline"} size={"icon"}>
