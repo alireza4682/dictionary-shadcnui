@@ -1,6 +1,6 @@
 
 {
-  "style": "default",
+  "style": "new-york",
   "rsc": true,
   "tailwind": {
     "config": "tailwind.config.js",
