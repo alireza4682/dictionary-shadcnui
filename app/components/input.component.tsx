@@ -45,6 +45,7 @@ export default function InputWord() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     dispatch(setHeadWord(values.search));
+
     if (status === "success") {
       dispatch(makeNewCard(data));
     }
@@ -57,7 +58,6 @@ export default function InputWord() {
           control={form.control}
           name="search"
           render={({ field }) => (
-            <FormItem>
               <FormItem>
                 <FormLabel>search</FormLabel>
                 <FormControl>
@@ -66,7 +66,6 @@ export default function InputWord() {
                 <FormDescription>search an english word</FormDescription>
                 <FormMessage />
               </FormItem>
-            </FormItem>
           )}
         ></FormField>
         <Button type="submit">search</Button>
