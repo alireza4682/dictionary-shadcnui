@@ -4,7 +4,7 @@ import { Button } from "./ui/button.ui";
 import { Input } from "./ui/input.ui";
 import { RootState, useAppDispatch } from "../store/store";
 import useQueryWord from "../hooks/queryWord";
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, useEffect } from "react";
 import { makeNewCard, setHeadWord } from "../store/slices/word.slice";
 import Link from "next/link";
 import * as z from "zod";
@@ -45,11 +45,13 @@ export default function InputWord() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     dispatch(setHeadWord(values.search));
+  }
 
+  useEffect(()=>{
     if (status === "success") {
       dispatch(makeNewCard(data));
     }
-  }
+  },[word,status])
 
   return (
     <Form {...form}>
