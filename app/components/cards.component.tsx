@@ -7,6 +7,7 @@ import { oneCardType } from "../store/slices/word.slice";
 
 export default function Cards() {
   const allCards = useSelector((store: RootState) => store.main.cards);
+
   const onCardListChange = useCallback(
     (allCards: oneCardType[]) => {
       return Array.isArray(allCards)
@@ -15,5 +16,6 @@ export default function Cards() {
     },
     [allCards]
   );
+
   return <div>{onCardListChange(allCards)}</div>;
 }

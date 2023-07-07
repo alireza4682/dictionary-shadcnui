@@ -12,7 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { array } from "zod";
 import { Separator } from "@radix-ui/react-separator";
 
 export const OneWord = (props: { wordToShow: string }) => {
