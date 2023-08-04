@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import useQueryWord, { TData } from "../hooks/queryWord";
 import { makeNewCard, setHeadWord } from "../store/slices/word.slice";
 import { RootState, useAppDispatch } from "../store/store";
-import { Button } from "./ui/button.ui";
+import { Button } from "@/components/ui/button";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import {
   Dialog,

@@ -1,7 +1,7 @@
 "use client";
 import { useSelector } from "react-redux";
-import { Button } from "./ui/button.ui";
-import { Input } from "./ui/input.ui";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { RootState, useAppDispatch } from "../store/store";
 import useQueryWord from "../hooks/queryWord";
 import { ChangeEvent, FormEvent, useEffect } from "react";
@@ -47,11 +47,11 @@ export default function InputWord() {
     dispatch(setHeadWord(values.search));
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     if (status === "success") {
       dispatch(makeNewCard(data));
     }
-  },[word,status])
+  }, [word, status]);
 
   return (
     <Form {...form}>
@@ -60,14 +60,14 @@ export default function InputWord() {
           control={form.control}
           name="search"
           render={({ field }) => (
-              <FormItem>
-                <FormLabel>search</FormLabel>
-                <FormControl>
-                  <Input placeholder="search" {...field} />
-                </FormControl>
-                <FormDescription>search an english word</FormDescription>
-                <FormMessage />
-              </FormItem>
+            <FormItem>
+              <FormLabel>search</FormLabel>
+              <FormControl>
+                <Input placeholder="search" {...field} />
+              </FormControl>
+              <FormDescription>search an english word</FormDescription>
+              <FormMessage />
+            </FormItem>
           )}
         ></FormField>
         <Button type="submit">search</Button>

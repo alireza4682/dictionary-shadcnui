@@ -1,22 +1,21 @@
-'use client'
-import  { TData } from "../hooks/queryWord";
+"use client";
 import { oneCardType } from "../store/slices/word.slice";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card.ui";
-import { Separator } from "./ui/separator.ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { OneWord } from "./oneWord.component";
 
-const OneCard = (data:TData[]) => {
-
-
-
+const OneCard = ({ card }: { card: oneCardType }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{}</CardTitle>
+        <CardTitle>{card.headWord}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div>yo</div>
-        <Separator />
-        <div>hey</div>
+        <div>
+          {card.rel.map((c, idx) => (
+            <OneWord wordToShow={c.headWord} key={idx} />
+          ))}
+        </div>
       </CardContent>
     </Card>
   );
