@@ -24,7 +24,7 @@ export const OneWord = (props: { wordToShow: string }) => {
   const onClickArrow = () => {
     dispatch(setHeadWord(wordToShow));
     if (status === "success") {
-      dispatch(makeNewCard(data));
+      dispatch(makeNewCard(data?.tags));
     }
   };
 

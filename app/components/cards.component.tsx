@@ -11,7 +11,7 @@ export default function Cards() {
   const onCardListChange = useCallback(
     (allCards: oneCardType[]) => {
       return Array.isArray(allCards)
-        ? allCards.map((c, idx) => <OneCard card={c} />)
+        ? allCards.map((c, idx) => <OneCard card={c} key={idx} />)
         : null;
     },
     [allCards]

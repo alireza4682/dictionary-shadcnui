@@ -41,6 +41,7 @@ export default function InputWord() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: { search: "" },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -49,7 +50,7 @@ export default function InputWord() {
 
   useEffect(() => {
     if (status === "success") {
-      dispatch(makeNewCard(data));
+      dispatch(makeNewCard(data?.word));
     }
   }, [word, status]);
 
