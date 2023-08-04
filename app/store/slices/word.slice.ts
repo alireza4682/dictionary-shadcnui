@@ -2,7 +2,7 @@ import { TData } from "@/app/hooks/queryWord";
 import { createSlice } from "@reduxjs/toolkit";
 
 export type relType = {
-  headWord: string;
+  word: string;
   score: number;
 };
 
@@ -60,7 +60,11 @@ const wordSlice = createSlice({
       if (!exist && state.currentWord) {
         state.cards.push({
           headWord: state.currentWord,
-          rel:action.payload.map((),
+          rel: action.payload.map((obj) => {
+            let word = obj.word;
+            let score = obj.score;
+            return { word, score };
+          }),
           mode: state.mode,
         });
       }

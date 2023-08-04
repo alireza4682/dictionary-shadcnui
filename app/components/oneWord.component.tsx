@@ -23,8 +23,8 @@ export const OneWord = (props: { wordToShow: string }) => {
   const { status, data } = useQueryWord(mode, wordToShow);
   const onClickArrow = () => {
     dispatch(setHeadWord(wordToShow));
-    if (status === "success") {
-      dispatch(makeNewCard(data?.tags));
+    if (status === "success" && data) {
+      dispatch(makeNewCard(data));
     }
   };
 

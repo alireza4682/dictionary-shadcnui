@@ -13,7 +13,7 @@ const OneCard = ({ card }: { card: oneCardType }) => {
       <CardContent>
         <div>
           {card.rel.map((c, idx) => (
-            <OneWord wordToShow={c.headWord} key={idx} />
+            <OneWord wordToShow={c.word} key={idx} />
           ))}
         </div>
       </CardContent>
