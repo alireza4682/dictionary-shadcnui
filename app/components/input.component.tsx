@@ -49,8 +49,8 @@ export default function InputWord() {
   }
 
   useEffect(() => {
-    if (status === "success") {
-      dispatch(makeNewCard(data?.word));
+    if (status === "success" && data) {
+      dispatch(makeNewCard(data));
     }
   }, [word, status]);
 

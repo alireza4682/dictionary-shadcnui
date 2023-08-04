@@ -20,7 +20,7 @@ const useQueryWord = (endpoint: TendPoint, headWord: string) => {
     queryKey: ["headWord", headWord, endpoint],
     queryFn: async () => {
       const response = await fetchWord(endpoint, headWord);
-      return response as TData;
+      return response as TData[];
     },
   });
   return { status, data };

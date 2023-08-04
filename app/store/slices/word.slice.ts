@@ -52,7 +52,7 @@ const wordSlice = createSlice({
       state.cards = [];
       state.currentWord = "";
     },
-    makeNewCard: (state, action) => {
+    makeNewCard: (state, action: { payload: TData[]; type: string }) => {
       const exist = state.cards.find(
         (card) =>
           card.headWord === state.currentWord && card.mode === state.mode
@@ -60,7 +60,7 @@ const wordSlice = createSlice({
       if (!exist && state.currentWord) {
         state.cards.push({
           headWord: state.currentWord,
-          rel: action.payload,
+          rel:action.payload.map((),
           mode: state.mode,
         });
       }
