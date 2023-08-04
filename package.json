@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "cypress": "^12.17.3",
+    "eslint-plugin-cypress": "^2.13.3",
     "tailwindcss-animate": "^1.0.6"
   }
 }
