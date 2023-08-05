@@ -38,12 +38,15 @@ export const OneWord = (props: { wordToShow: string }) => {
           <DialogHeader>
             <DialogTitle>{wordToShow}</DialogTitle>
           </DialogHeader>
-          <div>{data ? JSON.stringify(data) : <p>nothing</p>}</div>
+          <div>
+            {data ? JSON.stringify(data.map((w, _) => w.defs)) : <p>nothing</p>}
+          </div>
         </DialogContent>
       </Dialog>
       <Button variant={"outline"} size={"icon"} onClick={() => onClickArrow()}>
         <ChevronRightIcon className="h-4 w-4" />
       </Button>
+      <Separator />
     </div>
   );
 };
