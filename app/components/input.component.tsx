@@ -61,11 +61,9 @@ export default function InputWord() {
           name="search"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>search</FormLabel>
               <FormControl>
                 <Input placeholder="search" {...field} />
               </FormControl>
-              <FormDescription>search an english word</FormDescription>
               <FormMessage />
             </FormItem>
           )}

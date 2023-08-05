@@ -6,7 +6,7 @@ import { OneWord } from "./oneWord.component";
 
 const OneCard = ({ card }: { card: oneCardType }) => {
   return (
-    <Card>
+    <Card className="min-w-fit max-w-[300px] ">
       <CardHeader>
         <CardTitle>{card.headWord}</CardTitle>
       </CardHeader>

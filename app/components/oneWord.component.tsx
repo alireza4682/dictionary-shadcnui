@@ -29,10 +29,12 @@ export const OneWord = (props: { wordToShow: string }) => {
   };
 
   return (
-    <div className="flex flex-row justify-between text-black">
+    <div className="flex flex-row justify-between text-primary">
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant={"ghost"}>{wordToShow}</Button>
+          <Button variant={"ghost"} className="overflow-hidden">
+            {wordToShow}
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -46,7 +48,6 @@ export const OneWord = (props: { wordToShow: string }) => {
       <Button variant={"outline"} size={"icon"} onClick={() => onClickArrow()}>
         <ChevronRightIcon className="h-4 w-4" />
       </Button>
-      <Separator />
     </div>
   );
 };
