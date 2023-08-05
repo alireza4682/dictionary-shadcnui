@@ -55,7 +55,10 @@ export default function InputWord() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-row gap-4"
+      >
         <FormField
           control={form.control}
           name="search"

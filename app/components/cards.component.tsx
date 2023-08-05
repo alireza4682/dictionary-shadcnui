@@ -18,7 +18,7 @@ export default function Cards() {
   );
 
   return (
-    <div className="flex flex-wrap w-3/4 gap-6 justify-center [&>*]:animate-in [&>*]:slide-in-from-right-8 ">
+    <div className="flex flex-wrap w-3/4 gap-6 justify-center">
       {onCardListChange(allCards)}
     </div>
   );

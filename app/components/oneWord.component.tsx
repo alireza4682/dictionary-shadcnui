@@ -29,7 +29,7 @@ export const OneWord = (props: { wordToShow: string }) => {
   };
 
   return (
-    <div className="flex flex-row justify-between text-primary">
+    <div className="flex flex-row justify-between text-primary overflow-hidden">
       <Dialog>
         <DialogTrigger asChild>
           <Button variant={"ghost"} className="overflow-hidden">
