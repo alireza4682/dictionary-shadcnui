@@ -32,7 +32,7 @@ export default function Cards() {
   const onCardListChange = useCallback(
     (allCards: oneCardType[]) => {
       return (
-        <div className="w-full h-[400px] border">
+        <div className="w-full h-fit flex flex-col md:flex-row overflow-hidden gap-4 px-10 py-4 border-2 rounded-lg">
           {Array.isArray(allCards)
             ? allCards.map((c, idx) => (
                 <div
@@ -40,6 +40,7 @@ export default function Cards() {
                     const current = getCurrent();
                     if (node) {
                       current[idx] = node;
+                      scrollToIdx(idx);
                     } else {
                       current[idx] = {} as HTMLDivElement;
                     }
