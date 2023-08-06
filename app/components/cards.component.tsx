@@ -11,8 +11,8 @@ export default function Cards() {
   const itemsRef = useRef<Map<number, Element> | null>(null);
 
   function scrollToIdx(idx: number) {
-    const map = getMap();
-    const node = map.get(idx);
+    const current = getCurrent();
+    const node = current.get(idx);
     if (node) {
       node.scrollIntoView({
         behavior: "smooth",
@@ -22,7 +22,7 @@ export default function Cards() {
     }
   }
 
-  function getMap() {
+  function getCurrent() {
     if (!itemsRef.current) {
       itemsRef.current = new Map<number, Element>();
     }
@@ -33,21 +33,21 @@ export default function Cards() {
     (allCards: oneCardType[]) => {
       return (
         <>
-          <Button onClick={() => scrollToIdx(0)}></Button>
+          <Button onClick={() => scrollToIdx(0)}>first</Button>
           {Array.isArray(allCards) ??
             allCards.map((c, idx) => (
-              <OneCard
-                card={c}
-                key={idx}
-                ref={(node: Element) => {
-                  const map = getMap();
+              <div
+                ref={(node) => {
+                  const current = getCurrent();
                   if (node) {
-                    map.set(idx, node);
+                    current.set(idx, node);
                   } else {
-                    map.delete(idx);
+                    current.delete(idx);
                   }
                 }}
-              />
+              >
+                <OneCard card={c} key={idx} />
+              </div>
             ))}
         </>
       );
