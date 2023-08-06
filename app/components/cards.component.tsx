@@ -5,6 +5,7 @@ import { useCallback, useRef } from "react";
 import OneCard from "./oneCard.component";
 import { oneCardType } from "../store/slices/word.slice";
 import { Button } from "@/components/ui/button";
+import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 
 export default function Cards() {
   const allCards = useSelector((store: RootState) => store.main.cards);
@@ -15,9 +16,9 @@ export default function Cards() {
     const node = current[idx];
     if (node) {
       node.scrollIntoView({
-        behavior:'smooth',
-        block:'center',
-        inline:'center'
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center'
       });
     }
   }
@@ -32,13 +33,16 @@ export default function Cards() {
   const onCardListChange = useCallback(
     (allCards: oneCardType[]) => {
       return (
-        <div className="w-full h-fit flex flex-col md:flex-row snap-x overflow-scroll gap-4  rounded-lg">
+        <div className=" w-full h-fit flex flex-row gap-4 items-center">
           <Button
             onClick={() => scrollToIdx(0)}
             className="sticky left-0"
-          ></Button>
-          {Array.isArray(allCards)
-            ? allCards.map((c, idx) => (
+            variant='outline'
+            size='icon'
+          ><ChevronLeftIcon /></Button>
+          <div className=" flex flex-col md:flex-row snap-x overflow-scroll gap-4  rounded-lg">
+            {Array.isArray(allCards)
+              ? allCards.map((c, idx) => (
                 <div
                   className="snap-center"
                   ref={(node) => {
@@ -54,7 +58,15 @@ export default function Cards() {
                   <OneCard card={c} key={idx} />
                 </div>
               ))
-            : null}
+              : null}
+          </div>
+
+          <Button
+            onClick={() => scrollToIdx(allCards.length - 1)}
+            className="sticky left-0"
+            variant='outline'
+            size='icon'
+          ><ChevronRightIcon /></Button>
         </div>
       );
     },
