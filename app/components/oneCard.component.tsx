@@ -3,13 +3,16 @@ import { oneCardType } from "../store/slices/word.slice";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { OneWord } from "./oneWord.component";
-import { forwardRef, useRef } from "react";
+import React, { Ref, forwardRef } from "react";
 
 const OneCard = forwardRef(
-  (
-    { card }: { card: oneCardType },
-    ref: React.HTMLAttributes<HTMLDivElement>
-  ) => {
+  ({
+    card,
+    ref,
+  }: {
+    card: oneCardType;
+    ref: Ref<HTMLDivElement> | undefined;
+  }) => {
     return (
       <Card className="min-w-fit max-w-[300px] " ref={ref}>
         <CardHeader>
