@@ -1,6 +1,6 @@
 "use client";
 import { useSelector } from "react-redux";
-import useQueryWord, { TData } from "../hooks/queryWord";
+import useQueryWord from "../hooks/queryWord";
 import { makeNewCard, setHeadWord } from "../store/slices/word.slice";
 import { RootState, useAppDispatch } from "../store/store";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Separator } from "@radix-ui/react-separator";
 
 export const OneWord = (props: { wordToShow: string }) => {
   const { wordToShow } = props;

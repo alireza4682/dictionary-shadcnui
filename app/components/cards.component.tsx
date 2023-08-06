@@ -32,24 +32,24 @@ export default function Cards() {
   const onCardListChange = useCallback(
     (allCards: oneCardType[]) => {
       return (
-        <>
-          <Button onClick={() => scrollToIdx(0)}>first</Button>
-          {Array.isArray(allCards) ??
-            allCards.map((c, idx) => (
-              <div
-                ref={(node) => {
-                  const current = getCurrent();
-                  if (node) {
-                    current[idx] = node;
-                  } else {
-                    current[idx] = {} as HTMLDivElement;
-                  }
-                }}
-              >
-                <OneCard card={c} key={idx} />
-              </div>
-            ))}
-        </>
+        <div className="w-full h-[400px] border">
+          {Array.isArray(allCards)
+            ? allCards.map((c, idx) => (
+                <div
+                  ref={(node) => {
+                    const current = getCurrent();
+                    if (node) {
+                      current[idx] = node;
+                    } else {
+                      current[idx] = {} as HTMLDivElement;
+                    }
+                  }}
+                >
+                  <OneCard card={c} key={idx} />
+                </div>
+              ))
+            : null}
+        </div>
       );
     },
     [allCards]

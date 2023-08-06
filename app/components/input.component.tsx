@@ -12,10 +12,8 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 
@@ -65,7 +63,12 @@ export default function InputWord() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="search" {...field} />
+                <Input
+                  placeholder="search"
+                  {...field}
+                  id="main_input"
+                  aria-describedby="input_search_field"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
