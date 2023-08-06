@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button";
 
 export default function Cards() {
   const allCards = useSelector((store: RootState) => store.main.cards);
-  const itemsRef = useRef<Map<number, Element> | null>(null);
+  const itemsRef = useRef<Array<HTMLDivElement>>([]);
 
   function scrollToIdx(idx: number) {
     const current = getCurrent();
-    const node = current.get(idx);
+    const node = current[idx];
     if (node) {
       node.scrollIntoView({
         behavior: "smooth",
@@ -24,7 +24,7 @@ export default function Cards() {
 
   function getCurrent() {
     if (!itemsRef.current) {
-      itemsRef.current = new Map<number, Element>();
+      itemsRef.current = [];
     }
     return itemsRef.current;
   }
@@ -40,9 +40,9 @@ export default function Cards() {
                 ref={(node) => {
                   const current = getCurrent();
                   if (node) {
-                    current.set(idx, node);
+                    current[idx] = node;
                   } else {
-                    current.delete(idx);
+                    current[idx] = {} as HTMLDivElement;
                   }
                 }}
               >
