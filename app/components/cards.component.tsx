@@ -14,11 +14,7 @@ export default function Cards() {
     const current = getCurrent();
     const node = current[idx];
     if (node) {
-      node.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+      node.scrollIntoView({});
     }
   }
 
@@ -32,7 +28,7 @@ export default function Cards() {
   const onCardListChange = useCallback(
     (allCards: oneCardType[]) => {
       return (
-        <div className="w-full h-fit flex flex-col md:flex-row overflow-hidden gap-4 px-10 py-4 border-2 rounded-lg">
+        <div className="w-full h-fit flex flex-col md:flex-row scroll-smooth snap-x overflow-scroll gap-4 px-10 py-4 border-2 rounded-lg">
           <Button
             onClick={() => scrollToIdx(0)}
             className="sticky top-0"
@@ -40,6 +36,7 @@ export default function Cards() {
           {Array.isArray(allCards)
             ? allCards.map((c, idx) => (
                 <div
+                  className="snap-center"
                   ref={(node) => {
                     const current = getCurrent();
                     if (node) {
