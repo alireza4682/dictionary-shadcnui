@@ -14,7 +14,11 @@ export default function Cards() {
     const current = getCurrent();
     const node = current[idx];
     if (node) {
-      node.scrollIntoView({});
+      node.scrollIntoView({
+        behavior:'smooth',
+        block:'center',
+        inline:'center'
+      });
     }
   }
 
@@ -28,10 +32,10 @@ export default function Cards() {
   const onCardListChange = useCallback(
     (allCards: oneCardType[]) => {
       return (
-        <div className="w-full h-fit flex flex-col md:flex-row scroll-smooth snap-x overflow-scroll gap-4 px-10 py-4 border-2 rounded-lg">
+        <div className="w-full h-fit flex flex-col md:flex-row snap-x overflow-scroll gap-4  rounded-lg">
           <Button
             onClick={() => scrollToIdx(0)}
-            className="sticky top-0"
+            className="sticky left-0"
           ></Button>
           {Array.isArray(allCards)
             ? allCards.map((c, idx) => (
