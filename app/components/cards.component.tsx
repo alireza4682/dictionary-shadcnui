@@ -33,6 +33,10 @@ export default function Cards() {
     (allCards: oneCardType[]) => {
       return (
         <div className="w-full h-[400px] border">
+          <Button
+            onClick={() => scrollToIdx(0)}
+            className="sticky top-0"
+          ></Button>
           {Array.isArray(allCards)
             ? allCards.map((c, idx) => (
                 <div
