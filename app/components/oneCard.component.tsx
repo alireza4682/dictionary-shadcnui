@@ -2,8 +2,9 @@
 import { oneCardType } from "../store/slices/word.slice";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OneWord } from "./oneWord.component";
+import { forwardRef } from "react";
 
-const OneCard = ({ card }: { card: oneCardType }) => {
+const OneCard = forwardRef(({ card }: { card: oneCardType }) => {
   return (
     <Card className="min-w-fit max-w-[300px] ">
       <CardHeader>
@@ -18,6 +19,6 @@ const OneCard = ({ card }: { card: oneCardType }) => {
       </CardContent>
     </Card>
   );
-};
+});
 
 export default OneCard;
