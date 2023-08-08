@@ -1,39 +1,33 @@
 "use client";
 import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { RootState, useAppDispatch } from "../store/store";
 import { useCallback, useState } from "react";
 import OneCard from "./oneCard.component";
-import { oneCardType } from "../store/slices/word.slice";
+import { goLeft, goRight, oneCardType } from "../store/slices/word.slice";
 import { Button } from "@/components/ui/button";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function CardsContainer() {
+  const dispatch = useAppDispatch();
   const allCards = useSelector((store: RootState) => store.main.cards);
-  const [position, setPosition] = useState(0);
+  const position = useSelector((store: RootState) => store.main.position);
   const [leftEnable, setLeftEnable] = useState(false);
   const [rightEnable, setRightEnable] = useState(false);
 
   const onClickLeft = () => {
-    if (position > 0) {
-      if (position === allCards.length - 1) setRightEnable(true);
-      setPosition(position - 1);
-      if (position === 0) setLeftEnable(false);
-    }
+    dispatch(goLeft);
+    if (position === 0) setLeftEnable(false);
+    if (position < allCards.length - 1) setRightEnable(true);
   };
   const onClickRight = () => {
-    if (position < allCards.length - 1) {
-      if (position === 0) setLeftEnable(true);
-      setPosition(position + 1);
-      if (position === allCards.length - 1) setRightEnable(false);
-    }
+    dispatch(goRight());
+    if (position === allCards.length - 1) setRightEnable(false);
+    if (position > 0) setLeftEnable(true);
   };
 
   const onCardListChange = useCallback(
     (allCards: oneCardType[]) => {
-      if (allCards.length > 0 && position !== 0) setLeftEnable(true);
-      if (allCards.length > 0 && position !== allCards.length - 1)
-        setRightEnable(true);
       return (
         <div className=" w-full flex flex-row gap-4 items-center justify-center h-[300px]">
           <Button

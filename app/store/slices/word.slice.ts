@@ -33,11 +33,17 @@ type MainStateType = {
   currentWord: string;
   cards: oneCardType[];
   mode: TendPoint;
+  position: number;
 };
 
 const wordSlice = createSlice({
   name: "headWord",
-  initialState: { currentWord: "", cards: [], mode: "ml" } as MainStateType,
+  initialState: {
+    currentWord: "",
+    cards: [],
+    mode: "ml",
+    position: 0,
+  } as MainStateType,
   reducers: {
     setHeadWord: (state, action) => {
       state.currentWord = "";
@@ -47,10 +53,12 @@ const wordSlice = createSlice({
       state.cards = state.cards.filter((card) => {
         return JSON.stringify(card) !== JSON.stringify(action.payload);
       });
+      state.position = state.position > 0 ? state.position - 1 : 0;
     },
     removeAllCards: (state) => {
       state.cards = [];
       state.currentWord = "";
+      state.position = 0;
     },
     makeNewCard: (state, action: { payload: TData[]; type: string }) => {
       const exist = state.cards.find(
@@ -68,15 +76,30 @@ const wordSlice = createSlice({
           mode: state.mode,
         });
       }
+      state.position = state.cards.length - 1;
     },
     setMode: (state, action) => {
       state.mode = action.payload;
+    },
+    goRight: (state) => {
+      if (state.position < state.cards.length - 1)
+        state.position = state.position + 1;
+    },
+    goLeft: (state) => {
+      if (state.position > 0) state.position = state.position - 1;
     },
   },
 });
 
 const { actions, reducer } = wordSlice;
-export const { setHeadWord, removeCard, removeAllCards, makeNewCard, setMode } =
-  actions;
+export const {
+  setHeadWord,
+  removeCard,
+  removeAllCards,
+  makeNewCard,
+  setMode,
+  goLeft,
+  goRight,
+} = actions;
 const wordReducer = reducer;
 export default wordReducer;
