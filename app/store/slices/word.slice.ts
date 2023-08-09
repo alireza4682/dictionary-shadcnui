@@ -34,6 +34,8 @@ type MainStateType = {
   cards: oneCardType[];
   mode: TendPoint;
   position: number;
+  left: boolean;
+  right: boolean;
 };
 
 const wordSlice = createSlice({
@@ -43,6 +45,8 @@ const wordSlice = createSlice({
     cards: [],
     mode: "ml",
     position: 0,
+    left: false,
+    right: false,
   } as MainStateType,
   reducers: {
     setHeadWord: (state, action) => {
@@ -76,6 +80,8 @@ const wordSlice = createSlice({
           mode: state.mode,
         });
         state.position = state.cards.length - 1;
+        state.right = false;
+        if (state.position > 0) state.left = true;
       }
     },
     setMode: (state, action) => {
@@ -84,9 +90,13 @@ const wordSlice = createSlice({
     goRight: (state) => {
       if (state.position < state.cards.length - 1)
         state.position = state.position + 1;
+      if (state.position === state.cards.length - 1) state.right = false;
+      if (state.position > 0) state.left = true;
     },
     goLeft: (state) => {
       if (state.position > 0) state.position = state.position - 1;
+      if (state.position < state.cards.length - 1) state.right = true;
+      if (state.position === 0) state.left = false;
     },
   },
 });

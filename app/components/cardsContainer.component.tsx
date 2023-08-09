@@ -12,18 +12,14 @@ export default function CardsContainer() {
   const dispatch = useAppDispatch();
   const allCards = useSelector((store: RootState) => store.main.cards);
   const position = useSelector((store: RootState) => store.main.position);
-  const [leftEnable, setLeftEnable] = useState(false);
-  const [rightEnable, setRightEnable] = useState(false);
+  const left = useSelector((store: RootState) => store.main.left);
+  const right = useSelector((store: RootState) => store.main.right);
 
   const onClickLeft = () => {
-    dispatch(goLeft);
-    if (position === 0) setLeftEnable(false);
-    if (position < allCards.length - 1) setRightEnable(true);
+    dispatch(goLeft());
   };
   const onClickRight = () => {
     dispatch(goRight());
-    if (position === allCards.length - 1) setRightEnable(false);
-    if (position > 0) setLeftEnable(true);
   };
 
   const onCardListChange = useCallback(() => {
@@ -33,7 +29,7 @@ export default function CardsContainer() {
           size="icon"
           className={cn(allCards.length ? "" : "hidden", "z-10")}
           onClick={onClickLeft}
-          disabled={!leftEnable}
+          disabled={!left}
         >
           <ChevronLeftIcon />
         </Button>
@@ -52,7 +48,7 @@ export default function CardsContainer() {
           size="icon"
           className={cn(allCards.length ? "" : "hidden", "z-10")}
           onClick={onClickRight}
-          disabled={!rightEnable}
+          disabled={!right}
         >
           <ChevronRightIcon />
         </Button>
