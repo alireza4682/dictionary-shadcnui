@@ -75,8 +75,8 @@ const wordSlice = createSlice({
           }),
           mode: state.mode,
         });
+        state.position = state.cards.length - 1;
       }
-      state.position = state.cards.length - 1;
     },
     setMode: (state, action) => {
       state.mode = action.payload;
