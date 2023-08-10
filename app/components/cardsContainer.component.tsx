@@ -15,7 +15,6 @@ export default function CardsContainer() {
   const position = useSelector((store: RootState) => store.main.position);
   const left = useSelector((store: RootState) => store.main.left);
   const right = useSelector((store: RootState) => store.main.right);
-  const [direction, setDirection] = useState<1 | -1>(-1);
 
   const windowSize = useWindowSize();
   const screenSize = () => {
@@ -28,11 +27,9 @@ export default function CardsContainer() {
 
   const onClickLeft = () => {
     dispatch(goLeft());
-    setDirection(-1);
   };
   const onClickRight = () => {
     dispatch(goRight());
-    setDirection(1);
   };
 
   const chooseCardsToShow = (
@@ -42,24 +39,24 @@ export default function CardsContainer() {
   ) => {
     if (Array.isArray(arrayOfCards)) {
       for (let i = 0; i < arrayOfCards.length; i++) {
-        if (screen === screenSize()) {
+        if (screen === 1) {
           return (
             <div className={cn(i === currentPos ? "" : "hidden")} key={i}>
               <OneCard card={arrayOfCards[i]} />
             </div>
           );
-        } else if (screen === screenSize()) {
+        } else if (screen === 2) {
           return (
             <div
               className={cn(
-                i === currentPos || i === currentPos + direction ? "" : "hidden"
+                i === currentPos || i === currentPos - 1 ? "" : "hidden"
               )}
               key={i}
             >
               <OneCard card={arrayOfCards[i]} />
             </div>
           );
-        } else if (screen === screenSize()) {
+        } else if (screen === 3) {
           return (
             <div
               className={cn(
@@ -91,7 +88,7 @@ export default function CardsContainer() {
         <div
           className={cn("w-1/2 flex flex-row justify-center overflow-x-hidden")}
         >
-          {chooseCardsToShow(allCards, position, 3)}
+          {chooseCardsToShow(allCards, position, screenSize())}
         </div>
         <Button
           size="icon"
