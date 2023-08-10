@@ -38,38 +38,44 @@ export default function CardsContainer() {
     screen: 1 | 2 | 3
   ) => {
     if (Array.isArray(arrayOfCards)) {
-      for (let i = 0; i < arrayOfCards.length; i++) {
-        if (screen === 1) {
+      if (screen === 1) {
+        return arrayOfCards.map((card, idx) => {
           return (
-            <div className={cn(i === currentPos ? "" : "hidden")} key={i}>
-              <OneCard card={arrayOfCards[i]} />
+            <div className={cn(idx === currentPos ? "" : "hidden")} key={idx}>
+              <OneCard card={card} />
             </div>
           );
-        } else if (screen === 2) {
+        });
+      } else if (screen === 2) {
+        return arrayOfCards.map((card, idx) => {
           return (
             <div
               className={cn(
-                i === currentPos || i === currentPos - 1 ? "" : "hidden"
+                idx === currentPos || idx === currentPos - 1 ? "" : "hidden"
               )}
-              key={i}
+              key={idx}
             >
-              <OneCard card={arrayOfCards[i]} />
+              <OneCard card={card} />
             </div>
           );
-        } else if (screen === 3) {
+        });
+      } else {
+        return arrayOfCards.map((card, idx) => {
           return (
             <div
               className={cn(
-                i === currentPos || i === currentPos + 1 || i === currentPos - 1
+                idx === currentPos ||
+                  idx === currentPos - 1 ||
+                  idx === currentPos + 1
                   ? ""
                   : "hidden"
               )}
-              key={i}
+              key={idx}
             >
-              <OneCard card={arrayOfCards[i]} />
+              <OneCard card={card} />
             </div>
           );
-        }
+        });
       }
     }
   };
@@ -86,7 +92,7 @@ export default function CardsContainer() {
           <ChevronLeftIcon />
         </Button>
         <div
-          className={cn("w-1/2 flex flex-row justify-center overflow-x-hidden")}
+          className={cn("w-fit flex flex-row justify-center overflow-x-hidden")}
         >
           {chooseCardsToShow(allCards, position, screenSize())}
         </div>
