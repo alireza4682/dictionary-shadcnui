@@ -33,9 +33,10 @@ type MainStateType = {
   currentWord: string;
   cards: oneCardType[];
   mode: TendPoint;
-  position: number;
-  left: boolean;
-  right: boolean;
+  left: number;
+  right: number;
+  goLeftEnable: boolean;
+  goRightEnable: boolean;
 };
 
 const wordSlice = createSlice({
@@ -44,9 +45,10 @@ const wordSlice = createSlice({
     currentWord: "",
     cards: [],
     mode: "ml",
-    position: 0,
-    left: false,
-    right: false,
+    left: 0,
+    right: 0,
+    goLeftEnable: false,
+    goRightEnable: false,
   } as MainStateType,
   reducers: {
     setHeadWord: (state, action) => {
@@ -57,12 +59,14 @@ const wordSlice = createSlice({
       state.cards = state.cards.filter((card) => {
         return JSON.stringify(card) !== JSON.stringify(action.payload);
       });
-      state.position = state.position > 0 ? state.position - 1 : 0;
+      if (!state.cards[state.right] && state.cards[state.right - 1])
+        state.right = state.right - 1;
     },
     removeAllCards: (state) => {
       state.cards = [];
       state.currentWord = "";
-      state.position = 0;
+      state.left = 0;
+      state.right = 0;
     },
     makeNewCard: (state, action: { payload: TData[]; type: string }) => {
       const exist = state.cards.find(
@@ -79,24 +83,30 @@ const wordSlice = createSlice({
           }),
           mode: state.mode,
         });
-        state.position = state.cards.length - 1;
-        state.right = false;
-        if (state.position > 0) state.left = true;
+        let oldRight = state.right;
+        state.right = state.cards.length - 1;
+        state.left = state.left + (state.right - oldRight);
       }
     },
     setMode: (state, action) => {
       state.mode = action.payload;
     },
     goRight: (state) => {
-      if (state.position < state.cards.length - 1)
-        state.position = state.position + 1;
-      if (state.position === state.cards.length - 1) state.right = false;
-      if (state.position > 0) state.left = true;
+      if (state.right < state.cards.length - 1) {
+        state.right++;
+        state.left++;
+      }
+      if (state.right === state.cards.length - 1) state.goRightEnable = false;
+      if (state.left > 0) state.goLeftEnable = true;
     },
     goLeft: (state) => {
-      if (state.position > 0) state.position = state.position - 1;
-      if (state.position < state.cards.length - 1) state.right = true;
-      if (state.position === 0) state.left = false;
+      if (state.left > 0) {
+        state.left--;
+        state.right--;
+      }
+      if (state.left === 0) state.goLeftEnable = false;
+      if (state.right < state.cards.length - 1 && state.right > 0)
+        state.goRightEnable = true;
     },
   },
 });
