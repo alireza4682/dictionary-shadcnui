@@ -1,11 +1,12 @@
 "use client";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import { useCallback, useRef } from "react";
-import OneCard from "./oneCard.component";
-import { oneCardType } from "../store/slices/word.slice";
+
 import { Button } from "@/components/ui/button";
-import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { useCallback, useRef } from "react";
+import { useSelector } from "react-redux";
+import { oneCardType } from "../store/slices/word.slice";
+import { RootState } from "../store/store";
+import OneCard from "./oneCard.component";
 
 export default function Cards() {
   const allCards = useSelector((store: RootState) => store.main.cards);
@@ -74,7 +75,7 @@ export default function Cards() {
         </div>
       );
     },
-    [allCards]
+    [allCards],
   );
 
   return (

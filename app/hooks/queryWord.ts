@@ -10,7 +10,7 @@ export type TData = {
 
 const fetchWord = async (endpoint: TendPoint, newWord: string) => {
   const res = await fetch(
-    `https://api.datamuse.com/words?${endpoint}=${newWord}&max=5&md=d`
+    `https://api.datamuse.com/words?${endpoint}=${newWord}&max=5&md=d`,
   );
   return await res.json();
 };

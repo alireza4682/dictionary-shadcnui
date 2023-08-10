@@ -1,14 +1,6 @@
 "use client";
-import { useSelector } from "react-redux";
+
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { RootState, useAppDispatch } from "../store/store";
-import useQueryWord from "../hooks/queryWord";
-import { useEffect } from "react";
-import { makeNewCard, setHeadWord } from "../store/slices/word.slice";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -16,6 +8,15 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import * as z from "zod";
+import useQueryWord from "../hooks/queryWord";
+import { makeNewCard, setHeadWord } from "../store/slices/word.slice";
+import { RootState, useAppDispatch } from "../store/store";
 
 const formSchema = z.object({
   search: z

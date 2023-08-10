@@ -80,7 +80,7 @@ const wordSlice = createSlice({
     makeNewCard: (state, action: { payload: TData[]; type: string }) => {
       const exist = state.cards.find(
         (card) =>
-          card.headWord === state.currentWord && card.mode === state.mode
+          card.headWord === state.currentWord && card.mode === state.mode,
       );
       if (!exist && state.currentWord) {
         state.cards.push({

@@ -1,8 +1,9 @@
 "use client";
-import { oneCardType } from "../store/slices/word.slice";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { OneWord } from "./oneWord.component";
 import { forwardRef } from "react";
+import { oneCardType } from "../store/slices/word.slice";
+import { OneWord } from "./oneWord.component";
 
 const OneCard = forwardRef(({ card }: { card: oneCardType }) => {
   return (

@@ -1,22 +1,23 @@
 "use client";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../store/store";
-import { useCallback, useState } from "react";
-import OneCard from "./oneCard.component";
-import { goLeft, goRight, oneCardType } from "../store/slices/word.slice";
+
 import { Button } from "@/components/ui/button";
-import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 import useWindowSize from "../hooks/windowSize";
+import { goLeft, goRight, oneCardType } from "../store/slices/word.slice";
+import { RootState, useAppDispatch } from "../store/store";
+import OneCard from "./oneCard.component";
 
 export default function CardsContainer() {
   const dispatch = useAppDispatch();
   const allCards = useSelector((store: RootState) => store.main.cards);
   const goLeftEnable = useSelector(
-    (store: RootState) => store.main.goLeftEnable
+    (store: RootState) => store.main.goLeftEnable,
   );
   const goRightEnable = useSelector(
-    (store: RootState) => store.main.goRightEnable
+    (store: RootState) => store.main.goRightEnable,
   );
   const left = useSelector((store: RootState) => store.main.left);
   const right = useSelector((store: RootState) => store.main.right);
@@ -39,7 +40,7 @@ export default function CardsContainer() {
 
   const chooseCardsToShow = (
     arrayOfCards: oneCardType[],
-    screen: 1 | 2 | 3
+    screen: 1 | 2 | 3,
   ) => {
     if (Array.isArray(arrayOfCards)) {
       if (screen === 1) {
@@ -70,7 +71,7 @@ export default function CardsContainer() {
                   idx === right ||
                   idx === Math.floor((left + right) / 2)
                   ? ""
-                  : "hidden"
+                  : "hidden",
               )}
               key={idx}
             >

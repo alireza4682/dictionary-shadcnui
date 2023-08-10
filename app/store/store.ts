@@ -1,18 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import wordReducer from "./slices/word.slice";
-
 import {
-  persistStore,
-  persistReducer,
-  PERSIST,
-  REHYDRATE,
   FLUSH,
   PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import wordReducer from "./slices/word.slice";
 
 const persistConfig = {
   key: "root",

@@ -1,10 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
+
 import { Button } from "@/components/ui/button";
-import { Moon } from "lucide-react";
-import { Sun } from "lucide-react";
-import { CircleDashed } from "lucide-react";
+import { CircleDashed, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false);
