@@ -5,7 +5,11 @@ import { forwardRef } from "react";
 import { oneCardType } from "../store/slices/word.slice";
 import { OneWord } from "./oneWord.component";
 
-const OneCard = forwardRef(({ card }: { card: oneCardType }) => {
+const OneCard = forwardRef(function onlyOneCard({
+  card,
+}: {
+  card: oneCardType;
+}) {
   return (
     <Card className="min-w-fit max-w-[300px] ">
       <CardHeader>

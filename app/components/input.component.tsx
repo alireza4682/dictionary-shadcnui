@@ -50,7 +50,7 @@ export default function InputWord() {
     if (status === "success" && data) {
       dispatch(makeNewCard(data));
     }
-  }, [word, status]);
+  }, [data, status, dispatch]);
 
   return (
     <Form {...form}>

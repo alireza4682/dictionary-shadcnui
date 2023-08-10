@@ -23,67 +23,65 @@ export default function CardsContainer() {
   const right = useSelector((store: RootState) => store.main.right);
 
   const windowSize = useWindowSize();
-  const screenSize = () => {
-    if (windowSize.width < 640) {
-      return 1;
-    } else if (windowSize.width < 1024) {
-      return 2;
-    } else return 3;
-  };
-
-  const onClickLeft = () => {
-    dispatch(goLeft());
-  };
-  const onClickRight = () => {
-    dispatch(goRight());
-  };
-
-  const chooseCardsToShow = (
-    arrayOfCards: oneCardType[],
-    screen: 1 | 2 | 3,
-  ) => {
-    if (Array.isArray(arrayOfCards)) {
-      if (screen === 1) {
-        return arrayOfCards.map((card, idx) => {
-          return (
-            <div className={cn(idx === left ? "" : "hidden")} key={idx}>
-              <OneCard card={card} />
-            </div>
-          );
-        });
-      } else if (screen === 2) {
-        return arrayOfCards.map((card, idx) => {
-          return (
-            <div
-              className={cn(idx === left || idx === right ? "" : "hidden")}
-              key={idx}
-            >
-              <OneCard card={card} />
-            </div>
-          );
-        });
-      } else {
-        return arrayOfCards.map((card, idx) => {
-          return (
-            <div
-              className={cn(
-                idx === left ||
-                  idx === right ||
-                  idx === Math.floor((left + right) / 2)
-                  ? ""
-                  : "hidden",
-              )}
-              key={idx}
-            >
-              <OneCard card={card} />
-            </div>
-          );
-        });
-      }
-    }
-  };
 
   const onCardListChange = useCallback(() => {
+    const screenSize = () => {
+      if (windowSize.width < 640) {
+        return 1;
+      } else if (windowSize.width < 1024) {
+        return 2;
+      } else return 3;
+    };
+    const onClickLeft = () => {
+      dispatch(goLeft());
+    };
+    const onClickRight = () => {
+      dispatch(goRight());
+    };
+    const chooseCardsToShow = (
+      arrayOfCards: oneCardType[],
+      screen: 1 | 2 | 3,
+    ) => {
+      if (Array.isArray(arrayOfCards)) {
+        if (screen === 1) {
+          return arrayOfCards.map((card, idx) => {
+            return (
+              <div className={cn(idx === left ? "" : "hidden")} key={idx}>
+                <OneCard card={card} />
+              </div>
+            );
+          });
+        } else if (screen === 2) {
+          return arrayOfCards.map((card, idx) => {
+            return (
+              <div
+                className={cn(idx === left || idx === right ? "" : "hidden")}
+                key={idx}
+              >
+                <OneCard card={card} />
+              </div>
+            );
+          });
+        } else {
+          return arrayOfCards.map((card, idx) => {
+            return (
+              <div
+                className={cn(
+                  idx === left ||
+                    idx === right ||
+                    idx === Math.floor((left + right) / 2)
+                    ? ""
+                    : "hidden",
+                )}
+                key={idx}
+              >
+                <OneCard card={card} />
+              </div>
+            );
+          });
+        }
+      }
+    };
     return (
       <div className=" w-full flex flex-row gap-4 items-center justify-center h-[300px]">
         <Button
@@ -109,7 +107,15 @@ export default function CardsContainer() {
         </Button>
       </div>
     );
-  }, [allCards, left, right]);
+  }, [
+    allCards,
+    goLeftEnable,
+    goRightEnable,
+    left,
+    right,
+    dispatch,
+    windowSize.width,
+  ]);
 
   return (
     <div className="flex flex-wrap w-3/4 gap-6 justify-center">
