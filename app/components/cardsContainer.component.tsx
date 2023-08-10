@@ -12,7 +12,12 @@ import useWindowSize from "../hooks/windowSize";
 export default function CardsContainer() {
   const dispatch = useAppDispatch();
   const allCards = useSelector((store: RootState) => store.main.cards);
-  const position = useSelector((store: RootState) => store.main.position);
+  const goLeftEnable = useSelector(
+    (store: RootState) => store.main.goLeftEnable
+  );
+  const goRightEnable = useSelector(
+    (store: RootState) => store.main.goRightEnable
+  );
   const left = useSelector((store: RootState) => store.main.left);
   const right = useSelector((store: RootState) => store.main.right);
 
@@ -34,14 +39,13 @@ export default function CardsContainer() {
 
   const chooseCardsToShow = (
     arrayOfCards: oneCardType[],
-    currentPos: number,
     screen: 1 | 2 | 3
   ) => {
     if (Array.isArray(arrayOfCards)) {
       if (screen === 1) {
         return arrayOfCards.map((card, idx) => {
           return (
-            <div className={cn(idx === currentPos ? "" : "hidden")} key={idx}>
+            <div className={cn(idx === left ? "" : "hidden")} key={idx}>
               <OneCard card={card} />
             </div>
           );
@@ -50,9 +54,7 @@ export default function CardsContainer() {
         return arrayOfCards.map((card, idx) => {
           return (
             <div
-              className={cn(
-                idx === currentPos || idx === currentPos - 1 ? "" : "hidden"
-              )}
+              className={cn(idx === left || idx === right ? "" : "hidden")}
               key={idx}
             >
               <OneCard card={card} />
@@ -64,9 +66,9 @@ export default function CardsContainer() {
           return (
             <div
               className={cn(
-                idx === currentPos ||
-                  idx === currentPos - 1 ||
-                  idx === currentPos + 1
+                idx === left ||
+                  idx === right ||
+                  idx === Math.floor((left + right) / 2)
                   ? ""
                   : "hidden"
               )}
@@ -87,26 +89,26 @@ export default function CardsContainer() {
           size="icon"
           className={cn(allCards.length ? "" : "hidden", "z-10")}
           onClick={onClickLeft}
-          disabled={!left}
+          disabled={!goLeftEnable}
         >
           <ChevronLeftIcon />
         </Button>
         <div
           className={cn("w-fit flex flex-row justify-center overflow-x-hidden")}
         >
-          {chooseCardsToShow(allCards, position, screenSize())}
+          {chooseCardsToShow(allCards, screenSize())}
         </div>
         <Button
           size="icon"
           className={cn(allCards.length ? "" : "hidden", "z-10")}
           onClick={onClickRight}
-          disabled={!right}
+          disabled={!goRightEnable}
         >
           <ChevronRightIcon />
         </Button>
       </div>
     );
-  }, [allCards, position]);
+  }, [allCards, left, right]);
 
   return (
     <div className="flex flex-wrap w-3/4 gap-6 justify-center">

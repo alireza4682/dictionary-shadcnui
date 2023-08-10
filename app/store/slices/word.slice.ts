@@ -59,14 +59,23 @@ const wordSlice = createSlice({
       state.cards = state.cards.filter((card) => {
         return JSON.stringify(card) !== JSON.stringify(action.payload);
       });
-      if (!state.cards[state.right] && state.cards[state.right - 1])
+      if (!state.cards[state.right] && state.cards[state.right - 1]) {
         state.right = state.right - 1;
+      }
+      if (state.cards[state.right + 1]) {
+        state.goRightEnable = false;
+      }
+      if (state.cards[state.left - 1]) {
+        state.goLeftEnable = false;
+      }
     },
     removeAllCards: (state) => {
       state.cards = [];
       state.currentWord = "";
       state.left = 0;
       state.right = 0;
+      state.goLeftEnable = false;
+      state.goRightEnable = false;
     },
     makeNewCard: (state, action: { payload: TData[]; type: string }) => {
       const exist = state.cards.find(
