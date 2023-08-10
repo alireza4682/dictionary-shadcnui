@@ -95,6 +95,8 @@ const wordSlice = createSlice({
         let oldRight = state.right;
         state.right = state.cards.length - 1;
         state.left = state.left + (state.right - oldRight);
+        if (state.cards.length > 1) state.goLeftEnable = true;
+        state.goRightEnable = false;
       }
     },
     setMode: (state, action) => {

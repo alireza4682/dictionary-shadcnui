@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import useWindowSize from "../hooks/windowSize";
 import { goLeft, goRight, oneCardType } from "../store/slices/word.slice";
