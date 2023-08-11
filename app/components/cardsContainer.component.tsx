@@ -28,16 +28,21 @@ export default function CardsContainer() {
   const right = useSelector((store: RootState) => store.main.right);
 
   const windowSize = useWindowSize();
-  const windowWidth = useSelector((store: RootState) => store.main.windowWidth);
+  const screenSize = () => {
+    if (windowSize.width < 640) {
+      dispatch(setWindowSize(0));
+      return 0;
+    } else if (windowSize.width < 1024) {
+      dispatch(setWindowSize(1));
+      return 1;
+    } else {
+      dispatch(setWindowSize(2));
+      return 2;
+    }
+  };
+  const windowWidth = screenSize();
 
   const onCardListChange = useCallback(() => {
-    const screenSize = () => {
-      if (windowSize.width < 640) {
-        dispatch(setWindowSize(0));
-      } else if (windowSize.width < 1024) {
-        dispatch(setWindowSize(1));
-      } else dispatch(setWindowSize(2));
-    };
     const onClickLeft = () => {
       dispatch(goLeft());
     };
@@ -118,7 +123,6 @@ export default function CardsContainer() {
     goLeftEnable,
     windowWidth,
     goRightEnable,
-    windowSize.width,
     dispatch,
     left,
     right,
