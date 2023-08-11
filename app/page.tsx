@@ -1,4 +1,3 @@
-import Cards from "./components/cards.component";
 import CardsContainer from "./components/cardsContainer.component";
 import InputWord from "./components/input.component";
 import ThemeSwitch from "./components/themeSwitch";
