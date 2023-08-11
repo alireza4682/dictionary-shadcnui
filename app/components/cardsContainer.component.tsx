@@ -6,7 +6,12 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import useWindowSize from "../hooks/windowSize";
-import { goLeft, goRight, oneCardType } from "../store/slices/word.slice";
+import {
+  goLeft,
+  goRight,
+  oneCardType,
+  setWindowSize,
+} from "../store/slices/word.slice";
 import { RootState, useAppDispatch } from "../store/store";
 import OneCard from "./oneCard.component";
 
@@ -23,14 +28,15 @@ export default function CardsContainer() {
   const right = useSelector((store: RootState) => store.main.right);
 
   const windowSize = useWindowSize();
+  const windowWidth = useSelector((store: RootState) => store.main.windowWidth);
 
   const onCardListChange = useCallback(() => {
     const screenSize = () => {
       if (windowSize.width < 640) {
-        return 1;
+        dispatch(setWindowSize(0));
       } else if (windowSize.width < 1024) {
-        return 2;
-      } else return 3;
+        dispatch(setWindowSize(1));
+      } else dispatch(setWindowSize(2));
     };
     const onClickLeft = () => {
       dispatch(goLeft());
@@ -40,7 +46,7 @@ export default function CardsContainer() {
     };
     const chooseCardsToShow = (
       arrayOfCards: oneCardType[],
-      screen: 1 | 2 | 3,
+      screen: 0 | 1 | 2,
     ) => {
       if (Array.isArray(arrayOfCards)) {
         if (screen === 1) {
@@ -95,7 +101,7 @@ export default function CardsContainer() {
         <div
           className={cn("w-fit flex flex-row justify-center overflow-x-hidden")}
         >
-          {chooseCardsToShow(allCards, screenSize())}
+          {chooseCardsToShow(allCards, windowWidth)}
         </div>
         <Button
           size="icon"
@@ -110,11 +116,12 @@ export default function CardsContainer() {
   }, [
     allCards,
     goLeftEnable,
+    windowWidth,
     goRightEnable,
+    windowSize.width,
+    dispatch,
     left,
     right,
-    dispatch,
-    windowSize.width,
   ]);
 
   return (

@@ -37,6 +37,7 @@ type MainStateType = {
   right: number;
   goLeftEnable: boolean;
   goRightEnable: boolean;
+  windowWidth: 0 | 1 | 2;
 };
 
 const wordSlice = createSlice({
@@ -49,6 +50,7 @@ const wordSlice = createSlice({
     right: 0,
     goLeftEnable: false,
     goRightEnable: false,
+    windowWidth: 0,
   } as MainStateType,
   reducers: {
     setHeadWord: (state, action) => {
@@ -92,10 +94,9 @@ const wordSlice = createSlice({
           }),
           mode: state.mode,
         });
-        let oldRight = state.right;
         state.right = state.cards.length - 1;
-        state.left = state.left + (state.right - oldRight);
-        if (state.cards.length > 1) state.goLeftEnable = true;
+        state.left = state.right - state.windowWidth;
+        if (state.left > 0) state.goLeftEnable = true;
         state.goRightEnable = false;
       }
     },
@@ -119,6 +120,9 @@ const wordSlice = createSlice({
       if (state.right < state.cards.length - 1 && state.right > 0)
         state.goRightEnable = true;
     },
+    setWindowSize: (state, action) => {
+      state.windowWidth = action.payload;
+    },
   },
 });
 
@@ -131,6 +135,7 @@ export const {
   setMode,
   goLeft,
   goRight,
+  setWindowSize,
 } = actions;
 const wordReducer = reducer;
 export default wordReducer;
