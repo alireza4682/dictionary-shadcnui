@@ -63,7 +63,7 @@ const wordSlice = createSlice({
       });
       if (!state.cards[state.right] && state.cards[state.right - 1]) {
         state.right = state.right - 1;
-        if(state.cards[state.left-1]) state.left = state.left - 1
+        if (state.cards[state.left - 1]) state.left = state.left - 1;
       }
       if (!state.cards[state.right + 1]) {
         state.goRightEnable = false;

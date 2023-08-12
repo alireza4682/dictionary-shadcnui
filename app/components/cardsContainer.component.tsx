@@ -49,6 +49,7 @@ export default function CardsContainer() {
     const onClickRight = () => {
       dispatch(goRight());
     };
+
     const chooseCardsToShow = (
       arrayOfCards: oneCardType[],
       screen: 0 | 1 | 2,
@@ -78,9 +79,7 @@ export default function CardsContainer() {
             return (
               <div
                 className={cn(
-                  idx === left ||
-                    idx === right ||
-                    idx === (left + right) / 2
+                  idx === left || idx === right || idx === (left + right) / 2
                     ? ""
                     : "hidden",
                 )}
