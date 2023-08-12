@@ -80,7 +80,7 @@ export default function CardsContainer() {
                 className={cn(
                   idx === left ||
                     idx === right ||
-                    idx === Math.floor((left + right) / 2)
+                    idx === (left + right) / 2
                     ? ""
                     : "hidden",
                 )}

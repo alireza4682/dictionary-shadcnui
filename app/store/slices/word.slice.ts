@@ -63,8 +63,9 @@ const wordSlice = createSlice({
       });
       if (!state.cards[state.right] && state.cards[state.right - 1]) {
         state.right = state.right - 1;
+        if(state.cards[state.left-1]) state.left = state.left - 1
       }
-      if (state.cards[state.right + 1]) {
+      if (!state.cards[state.right + 1]) {
         state.goRightEnable = false;
       }
       if (state.cards[state.left - 1]) {
@@ -95,11 +96,9 @@ const wordSlice = createSlice({
           mode: state.mode,
         });
         state.right = state.cards.length - 1;
-        console.log((state.right))
         if (state.right - state.left > state.windowWidth) {
           state.left = state.right - state.windowWidth;
         }
-        console.log(state.left)
         if (state.left > 0) state.goLeftEnable = true;
         state.goRightEnable = false;
       }
