@@ -58,7 +58,10 @@ export default function CardsContainer() {
         if (screen === 1) {
           return arrayOfCards.map((card, idx) => {
             return (
-              <div className={cn(idx === left ? "" : "hidden")} key={idx}>
+              <div
+                className={cn(idx === left ? "" : "hidden")}
+                key={card.headWord}
+              >
                 <OneCard card={card} />
               </div>
             );
@@ -68,7 +71,7 @@ export default function CardsContainer() {
             return (
               <div
                 className={cn(idx === left || idx === right ? "" : "hidden")}
-                key={idx}
+                key={card.headWord}
               >
                 <OneCard card={card} />
               </div>
@@ -83,7 +86,7 @@ export default function CardsContainer() {
                     ? ""
                     : "hidden",
                 )}
-                key={idx}
+                key={card.headWord}
               >
                 <OneCard card={card} />
               </div>
