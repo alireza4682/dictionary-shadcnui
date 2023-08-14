@@ -33,11 +33,6 @@ type MainStateType = {
   currentWord: string;
   cards: oneCardType[];
   mode: TendPoint;
-  left: number;
-  right: number;
-  goLeftEnable: boolean;
-  goRightEnable: boolean;
-  windowWidth: 0 | 1 | 2;
 };
 
 const wordSlice = createSlice({
@@ -61,24 +56,10 @@ const wordSlice = createSlice({
       state.cards = state.cards.filter((card) => {
         return JSON.stringify(card) !== JSON.stringify(action.payload);
       });
-      if (!state.cards[state.right] && state.cards[state.right - 1]) {
-        state.right = state.right - 1;
-        if (state.cards[state.left - 1]) state.left = state.left - 1;
-      }
-      if (!state.cards[state.right + 1]) {
-        state.goRightEnable = false;
-      }
-      if (state.cards[state.left - 1]) {
-        state.goLeftEnable = false;
-      }
     },
     removeAllCards: (state) => {
       state.cards = [];
       state.currentWord = "";
-      state.left = 0;
-      state.right = 0;
-      state.goLeftEnable = false;
-      state.goRightEnable = false;
     },
     makeNewCard: (state, action: { payload: TData[]; type: string }) => {
       const exist = state.cards.find(
@@ -95,51 +76,16 @@ const wordSlice = createSlice({
           }),
           mode: state.mode,
         });
-        state.right = state.cards.length - 1;
-        if (state.right - state.left > state.windowWidth) {
-          state.left = state.right - state.windowWidth;
-        }
-        if (state.left > 0) state.goLeftEnable = true;
-        state.goRightEnable = false;
       }
     },
     setMode: (state, action) => {
       state.mode = action.payload;
     },
-    goRight: (state) => {
-      if (state.right < state.cards.length - 1) {
-        state.right++;
-        state.left++;
-      }
-      if (state.right === state.cards.length - 1) state.goRightEnable = false;
-      if (state.left > 0) state.goLeftEnable = true;
-    },
-    goLeft: (state) => {
-      if (state.left > 0) {
-        state.left--;
-        state.right--;
-      }
-      if (state.left === 0) state.goLeftEnable = false;
-      if (state.right < state.cards.length - 1 && state.right > 0) {
-        state.goRightEnable = true;
-      }
-    },
-    setWindowSize: (state, action) => {
-      state.windowWidth = action.payload;
-    },
   },
 });
 
 const { actions, reducer } = wordSlice;
-export const {
-  setHeadWord,
-  removeCard,
-  removeAllCards,
-  makeNewCard,
-  setMode,
-  goLeft,
-  goRight,
-  setWindowSize,
-} = actions;
+export const { setHeadWord, removeCard, removeAllCards, makeNewCard, setMode } =
+  actions;
 const wordReducer = reducer;
 export default wordReducer;
