@@ -19,5 +19,9 @@ export default function useWindowSize() {
     };
   }, []);
 
-  return windowSize;
+  if (windowSize.width < 640) {
+    return 1;
+  } else if (windowSize.width < 1024) {
+    return 2;
+  } else return 3;
 }
