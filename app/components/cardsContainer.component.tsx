@@ -15,5 +15,18 @@ export default function CardsContainer() {
 
   const windowSize = useWindowSize();
 
-  return <div className="flex flex-wrap w-3/4 gap-6 justify-center"></div>;
+  const cardsToShow = (allCards: oneCardType[]) => {
+    return (
+      Array.isArray(allCards) &&
+      allCards.map((card, _) => (
+        <OneCard card={card} key={`${card.headWord} + ${card.mode}`} />
+      ))
+    );
+  };
+
+  return (
+    <div className="flex flex-wrap w-3/4 gap-6 justify-center">
+      {cardsToShow(allCards)}
+    </div>
+  );
 }
