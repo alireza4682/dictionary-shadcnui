@@ -27,6 +27,9 @@ export const OneWord = (props: { wordToShow: string }) => {
       dispatch(makeNewCard(data));
     }
   };
+  const inAllHeadwords = useSelector((store: RootState) =>
+    store.main.cards.find((card) => card.headWord === wordToShow),
+  );
 
   return (
     <div className="flex flex-row justify-between text-primary overflow-hidden">
@@ -45,7 +48,12 @@ export const OneWord = (props: { wordToShow: string }) => {
           </div>
         </DialogContent>
       </Dialog>
-      <Button variant={"outline"} size={"icon"} onClick={() => onClickArrow()}>
+      <Button
+        variant={"outline"}
+        size={"icon"}
+        onClick={() => onClickArrow()}
+        disabled={!!inAllHeadwords}
+      >
         <ChevronRightIcon className="h-4 w-4" />
       </Button>
     </div>

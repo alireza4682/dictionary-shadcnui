@@ -1,19 +1,30 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { forwardRef } from "react";
-import { oneCardType } from "../store/slices/word.slice";
+import { X } from "lucide-react";
+import { oneCardType, removeCard } from "../store/slices/word.slice";
+import { useAppDispatch } from "../store/store";
 import { OneWord } from "./oneWord.component";
 
-const OneCard = forwardRef(function onlyOneCard({
-  card,
-}: {
-  card: oneCardType;
-}) {
+const OneCard = function ({ card }: { card: oneCardType }) {
+  const dispatch = useAppDispatch();
+
+  const onClickClose = () => {
+    dispatch(removeCard(card));
+  };
+
   return (
-    <Card className="min-w-fit max-w-[300px] ">
+    <Card className="w-[250px] ">
       <CardHeader>
-        <CardTitle>{card.headWord}</CardTitle>
+        <CardTitle>
+          <div className="flex flex-row justify-between items-center text-sm font-extrabold">
+            {card.headWord}
+            <Button size="icon" variant="ghost" onClick={onClickClose}>
+              <X size={20} />
+            </Button>
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div>
@@ -24,6 +35,6 @@ const OneCard = forwardRef(function onlyOneCard({
       </CardContent>
     </Card>
   );
-});
+};
 
 export default OneCard;

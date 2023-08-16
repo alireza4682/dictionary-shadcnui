@@ -13,7 +13,7 @@ import OneCard from "./oneCard.component";
 export default function CardsContainer() {
   const allCards = useSelector((store: RootState) => store.main.cards);
   const [pos, setPos] = useState(0);
-  const prevLength= useRef(allCards.length)
+  const prevLength = useRef(allCards.length);
   const onClickLeft = () => {
     setPos(pos - 1);
   };
@@ -25,11 +25,11 @@ export default function CardsContainer() {
   const windowSize = useWindowSize();
 
   const cardsToMemo = useMemo(() => {
-    if(prevLength.current>allCards.length) {
-      prevLength.current = allCards.length
-      return
+    if (prevLength.current > allCards.length) {
+      prevLength.current = allCards.length;
+      return;
     }
-    setPos(0)
+    setPos(0);
     return Array.isArray(allCards)
       ? allCards.map((card, _) => (
           <OneCard card={card} key={`${card.headWord} + ${card.mode}`} />
