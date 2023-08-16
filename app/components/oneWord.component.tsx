@@ -44,7 +44,13 @@ export const OneWord = (props: { wordToShow: string }) => {
             <DialogTitle>{wordToShow}</DialogTitle>
           </DialogHeader>
           <div>
-            {data ? JSON.stringify(data.map((w, _) => w.defs)) : <p>nothing</p>}
+            {data ? (
+              JSON.stringify(
+                data.filter((w) => w.word === wordToShow).map((w, _) => w.defs),
+              )
+            ) : (
+              <p>nothing</p>
+            )}
           </div>
         </DialogContent>
       </Dialog>
