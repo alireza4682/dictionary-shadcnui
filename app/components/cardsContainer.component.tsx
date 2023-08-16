@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import useWindowSize from "../hooks/windowSize";
 import { oneCardType } from "../store/slices/word.slice";
@@ -13,6 +13,7 @@ import OneCard from "./oneCard.component";
 export default function CardsContainer() {
   const allCards = useSelector((store: RootState) => store.main.cards);
   const [pos, setPos] = useState(0);
+  const prevLength= useRef(allCards.length)
   const onClickLeft = () => {
     setPos(pos - 1);
   };
@@ -24,6 +25,11 @@ export default function CardsContainer() {
   const windowSize = useWindowSize();
 
   const cardsToMemo = useMemo(() => {
+    if(prevLength.current>allCards.length) {
+      prevLength.current = allCards.length
+      return
+    }
+    setPos(0)
     return Array.isArray(allCards)
       ? allCards.map((card, _) => (
           <OneCard card={card} key={`${card.headWord} + ${card.mode}`} />
