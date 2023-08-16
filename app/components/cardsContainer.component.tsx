@@ -14,11 +14,12 @@ export default function CardsContainer() {
   const allCards = useSelector((store: RootState) => store.main.cards);
   const [pos, setPos] = useState(0);
   const onClickLeft = () => {
-    pos >= 0 && setPos(pos - 1);
+    setPos(pos - 1);
+    console.log(pos);
   };
 
   const onClickRight = () => {
-    pos <= allCards.length - 1 && setPos(pos + 1);
+    setPos(pos + 1);
   };
 
   const windowSize = useWindowSize();
@@ -33,13 +34,17 @@ export default function CardsContainer() {
 
   return (
     <div className="flex flex-wrap w-3/4 gap-6 justify-center items-center">
-      <Button size="icon" onClick={onClickLeft}>
+      <Button
+        size="icon"
+        onClick={onClickLeft}
+        disabled={pos < 1 + windowSize - allCards.length}
+      >
         <ChevronLeftIcon />
       </Button>
       {cardsToShow(allCards)
         ?.slice()
-        .splice(pos - 3, 3)}
-      <Button size="icon" onClick={onClickRight}>
+        .splice(pos - windowSize, windowSize)}
+      <Button size="icon" onClick={onClickRight} disabled={pos > -1}>
         <ChevronRightIcon />
       </Button>
     </div>
