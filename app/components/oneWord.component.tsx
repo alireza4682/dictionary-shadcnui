@@ -34,8 +34,10 @@ export const OneWord = (props: { wordToShow: string }) => {
   const meaningFilter = (defs: string[]) => {
     return defs.map((def) => {
       if (def.startsWith("n")) {
-        return <p key={def}>{def.trimStart()}</p>;
-      }
+        return <p key={def}>{def.replace("n", "")}</p>;
+      } else if (def.startsWith("adj")) {
+        return <p key={def}>{def.replace("adj", "")}</p>;
+      } else return <p key={def}>{def}</p>;
     });
   };
 
