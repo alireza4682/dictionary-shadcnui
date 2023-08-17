@@ -31,6 +31,13 @@ export const OneWord = (props: { wordToShow: string }) => {
     store.main.cards.find((card) => card.headWord === wordToShow),
   );
 
+  const meaningFilter = (defs: string[]) => {
+    return defs.map((def) => {
+      const defArr = def.split(" ");
+      console.log(defArr);
+    });
+  };
+
   return (
     <div className="flex flex-row justify-between text-primary overflow-hidden">
       <Dialog>
@@ -44,13 +51,7 @@ export const OneWord = (props: { wordToShow: string }) => {
             <DialogTitle>{wordToShow}</DialogTitle>
           </DialogHeader>
           <div>
-            {data ? (
-              JSON.stringify(
-                data.filter((w) => w.word === wordToShow).map((w, _) => w.defs),
-              )
-            ) : (
-              <p>nothing</p>
-            )}
+            {data ? data.map((w, _) => meaningFilter(w.defs)) : <p>nothing</p>}
           </div>
         </DialogContent>
       </Dialog>
