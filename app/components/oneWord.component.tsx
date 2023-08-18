@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import { useSelector } from "react-redux";
 import useQueryWord from "../hooks/queryWord";
@@ -34,26 +36,45 @@ export const OneWord = (props: { wordToShow: string }) => {
   const meaningFilter = (defs: string[]) => {
     return defs.map((def) => {
       if (def.startsWith("n")) {
-        return <p key={def}>{def.replace("n", "")}</p>;
+        return (
+          <div key={def} className="">
+            <Badge className="bg-primary">noun</Badge>
+            <p>{def.replace("n", "")}</p>
+            <Separator />
+          </div>
+        );
       } else if (def.startsWith("adj")) {
-        return <p key={def}>{def.replace("adj", "")}</p>;
-      } else return <p key={def}>{def}</p>;
+        return (
+          <div key={def}>
+            <Badge className="bg-muted-foreground">adjective</Badge>
+            <p>{def.replace("adj", "")}</p>
+            <Separator />
+          </div>
+        );
+      } else
+        return (
+          <div key={def}>
+            <Badge className="bg-ring">adverb</Badge>
+            <p>{def.replace("adv", "")}</p>
+            <Separator />
+          </div>
+        );
     });
   };
 
   return (
-    <div className="flex flex-row justify-between text-primary overflow-hidden">
+    <div className="flex flex-row justify-between text-primary">
       <Dialog>
         <DialogTrigger asChild>
           <Button variant={"ghost"} className="overflow-hidden">
             {wordToShow}
           </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="overflow-scroll max-h-[600px]">
           <DialogHeader>
             <DialogTitle>{wordToShow}</DialogTitle>
           </DialogHeader>
-          <div>
+          <div className="text-sm flex flex-col gap-1">
             {data ? data.map((w, _) => meaningFilter(w.defs)) : <p>nothing</p>}
           </div>
         </DialogContent>
