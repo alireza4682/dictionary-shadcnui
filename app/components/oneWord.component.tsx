@@ -34,7 +34,7 @@ export const OneWord = (props: { wordToShow: string }) => {
   );
 
   const meaningFilter = (defs: string[]) => {
-    return defs.map((def) => {
+    return defs?.map((def) => {
       if (def.startsWith("n")) {
         return (
           <div key={def} className="">

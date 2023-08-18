@@ -2,11 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, X } from "lucide-react";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useWindowSize from "../hooks/windowSize";
-import { oneCardType } from "../store/slices/word.slice";
+import { oneCardType, removeAllCards } from "../store/slices/word.slice";
 import { RootState } from "../store/store";
 import OneCard from "./oneCard.component";
 
@@ -14,6 +14,11 @@ export default function CardsContainer() {
   const allCards = useSelector((store: RootState) => store.main.cards);
   const [pos, setPos] = useState(0);
   const prevLength = useRef(allCards.length);
+  const dispatch = useDispatch();
+
+  const onClickRemoveAll = () => {
+    dispatch(removeAllCards());
+  };
   const onClickLeft = () => {
     setPos(pos - 1);
   };
@@ -53,6 +58,9 @@ export default function CardsContainer() {
       {cardsToShow}
       <Button size="icon" onClick={onClickRight} disabled={pos > -1}>
         <ChevronRightIcon />
+      </Button>
+      <Button size="icon" onClick={onClickRemoveAll}>
+        <X />
       </Button>
     </div>
   );
