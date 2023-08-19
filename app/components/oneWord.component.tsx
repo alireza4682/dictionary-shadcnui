@@ -51,6 +51,14 @@ export const OneWord = (props: { wordToShow: string }) => {
             <Separator />
           </div>
         );
+      } else if (def.startsWith("v")) {
+        return (
+          <div key={def}>
+            <Badge variant="outline">verb</Badge>
+            <p>{def.replace("v", "")}</p>
+            <Separator />
+          </div>
+        );
       } else
         return (
           <div key={def}>
