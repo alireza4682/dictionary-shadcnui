@@ -5,6 +5,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectSeparator,
   SelectTrigger,
   SelectValue,
@@ -26,7 +27,12 @@ export default function ModeSelector() {
       <SelectTrigger>
         <SelectValue placeholder={mode} />
       </SelectTrigger>
-      <SelectContent></SelectContent>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Modes</SelectLabel>
+          <SelectItem value="" />
+        </SelectGroup>
+      </SelectContent>
     </Select>
   );
 }
