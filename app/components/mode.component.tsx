@@ -24,13 +24,17 @@ export default function ModeSelector() {
 
   return (
     <Select>
-      <SelectTrigger>
+      <SelectTrigger className="w-48">
         <SelectValue placeholder={mode} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="w-64">
         <SelectGroup>
           <SelectLabel>Modes</SelectLabel>
-          <SelectItem value="" />
+          <SelectItem value="ml">Means like</SelectItem>
+          <SelectItem value="sl">Sounds like</SelectItem>
+          <SelectItem value="rel_syn">Means like</SelectItem>
+          <SelectItem value="rel_trg">triggers</SelectItem>
+          <SelectItem value="rel_nry">Rhymes with</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
