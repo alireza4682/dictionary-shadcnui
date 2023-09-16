@@ -59,11 +59,6 @@ const wordSlice = createSlice({
     currentWord: "",
     cards: [],
     mode: "ml",
-    left: 0,
-    right: 0,
-    goLeftEnable: false,
-    goRightEnable: false,
-    windowWidth: 0,
   } as MainStateType,
   reducers: {
     setHeadWord: (state, action) => {

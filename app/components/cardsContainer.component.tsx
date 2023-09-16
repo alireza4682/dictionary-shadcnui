@@ -3,10 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon, X } from "lucide-react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useWindowSize from "../hooks/windowSize";
-import { oneCardType, removeAllCards } from "../store/slices/word.slice";
+import { removeAllCards } from "../store/slices/word.slice";
 import { RootState } from "../store/store";
 import OneCard from "./oneCard.component";
 
