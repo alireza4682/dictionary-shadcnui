@@ -36,7 +36,7 @@ export default function CardsContainer() {
     }
     setPos(0);
     return Array.isArray(allCards)
-      ? allCards.map((card, _) => (
+      ? allCards.map((card) => (
           <OneCard card={card} key={`${card.headWord} + ${card.mode}`} />
         ))
       : null;
